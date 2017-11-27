@@ -32,11 +32,11 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         green = int(green / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
         blue  = int(blue  / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
 
-        distance = 10000
+        distance = 255**2 * 3 # 最大の距離
         filename = ''
         # 色の差が最小になるファイルを決定(距離に見立てている)
         for color in color_data:
-            d = (red-int(color[1]))^2 + (green-int(color[2]))^2 + (blue-int(color[3]))^2
+            d = (red-int(color[1]))**2 + (green-int(color[2]))**2 + (blue-int(color[3]))**2
             if d < distance:
                 distance = d
                 filename = color[0]
