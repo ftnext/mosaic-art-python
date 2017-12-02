@@ -79,6 +79,25 @@ def average_color_in_range(icon_im, left, top, right, bottom):
     blue  = round(blue  / pixel_count)
     return (red, green, blue)
 
+def color_distance(RGB1, RGB2):
+    """Returns color distance
+
+    Considering the distance between two points
+    (x1, y1, z1) and (x2, y2, z2) in three dimensions
+
+    Args:
+        RGB1: A tuple which means (R, G, B)
+        RGB2: A tuple which means (R, G, B)
+
+    Returns:
+        color distance(:int)
+
+    """
+    d2_r = (RGB1[0] - RGB2[0]) ** 2
+    d2_g = (RGB1[1] - RGB2[1]) ** 2
+    d2_b = (RGB1[2] - RGB2[2]) ** 2
+    return d2_r + d2_g + d2_b
+
 def similar_color_filename(average_color, color_data):
     """Returns name of file similar to average color
 
@@ -92,7 +111,16 @@ def similar_color_filename(average_color, color_data):
     Returns:
         A name of file such as 'foo.png' (NOT path)
     """
-    pass
+    distance = MAX_COLOR_DISTANCE
+    filename = ''
+    # 色の差が最小になるファイルを決定(距離に見立てている)
+    for color in color_data:
+        sample_color = (color[POS_RED], color[POS_GREEN], color[POS_BLUE])
+        d = color_distance(average_color, sample_color)
+        if d < distance:
+            distance = d
+            filename = color[POS_NAME]
+    return filename
 
 color_data = materials_list_from_file('average_color.csv')
 
