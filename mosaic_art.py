@@ -130,20 +130,12 @@ mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
 for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
     for top in range(0, icon_im_height, DOT_AREA_ONE_SIDE):
-        try:
-            red, green, blue = average_color_in_range(icon_im, left, top,
-                                   left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
-        except ValueError:
+        average_color = average_color_in_range(icon_im, left, top,
+                            left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
+        if len(average_color) != 3:
             continue
 
-        distance = MAX_COLOR_DISTANCE
-        filename = ''
-        # 色の差が最小になるファイルを決定(距離に見立てている)
-        for color in color_data:
-            d = (red-color[POS_RED])**2 + (green-color[POS_GREEN])**2 + (blue-color[POS_BLUE])**2
-            if d < distance:
-                distance = d
-                filename = color[POS_NAME]
+        filename = similar_color_filename(average_color, color_data)
         # 距離最小のファイルを縮小して1600×1600の画像に貼り付け
         area_im = Image.open('image/euph_part_icon/'+filename)
         area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
