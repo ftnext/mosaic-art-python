@@ -38,7 +38,8 @@ def materials_list_from_file(filename):
     with open(filename, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            image_info = (row[0], int(row[1]), int(row[2]), int(row[3]))
+            image_info = (row[POS_NAME], int(row[POS_RED]),
+                          int(row[POS_GREEN]), int(row[POS_BLUE]))
             color_data.append(image_info)
     return color_data
 
@@ -107,17 +108,18 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         except ValueError:
             continue
 
-        distance = 255**2 * 3 # 最大の距離
+        distance = MAX_COLOR_DISTANCE
         filename = ''
         # 色の差が最小になるファイルを決定(距離に見立てている)
         for color in color_data:
-            d = (red-color[1])**2 + (green-color[2])**2 + (blue-color[3])**2
+            d = (red-color[POS_RED])**2 + (green-color[POS_GREEN])**2 + (blue-color[POS_BLUE])**2
             if d < distance:
                 distance = d
-                filename = color[0]
+                filename = color[POS_NAME]
         # 距離最小のファイルを縮小して1600×1600の画像に貼り付け
         area_im = Image.open('image/euph_part_icon/'+filename)
         area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
-        mosaic_icon_im.paste(area_im, (left//10 * THUMBNAIL_ONE_SIDE, top//10 * THUMBNAIL_ONE_SIDE))
+        mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
+                                       top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
 mosaic_icon_im.save('product/my_icon_mosaic.png')
