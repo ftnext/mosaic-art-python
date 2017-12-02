@@ -3,6 +3,16 @@ import csv
 from PIL import Image
 
 
+DOT_AREA_ONE_SIDE = 10
+THUMBNAIL_ONE_SIDE = 40
+# 2つの色(R,G,B)の間の最大の距離
+MAX_COLOR_DISTANCE = 255**2 * 3
+# CSVファイル中のカラムの意味づけ
+POS_NAME  = 0
+POS_RED   = 1
+POS_GREEN = 2
+POS_BLUE  = 3
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
@@ -82,9 +92,6 @@ def similar_color_filename(average_color, color_data):
         A name of file such as 'foo.png' (NOT path)
     """
     pass
-
-DOT_AREA_ONE_SIDE = 10
-THUMBNAIL_ONE_SIDE = 40
 
 color_data = materials_list_from_file('average_color.csv')
 
