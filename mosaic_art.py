@@ -35,11 +35,7 @@ def materials_list_from_file(filename):
 DOT_AREA_ONE_SIDE = 10
 THUMBNAIL_ONE_SIDE = 40
 
-color_data = []
-with open('average_color.csv' ,'r', newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    for row in reader:
-        color_data.append(row)
+color_data = materials_list_from_file('average_color.csv')
 
 icon_im = Image.open('my_icon.png')
 icon_im_width, icon_im_height = icon_im.size
@@ -65,7 +61,7 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         filename = ''
         # 色の差が最小になるファイルを決定(距離に見立てている)
         for color in color_data:
-            d = (red-int(color[1]))**2 + (green-int(color[2]))**2 + (blue-int(color[3]))**2
+            d = (red-color[1])**2 + (green-color[2])**2 + (blue-color[3])**2
             if d < distance:
                 distance = d
                 filename = color[0]
