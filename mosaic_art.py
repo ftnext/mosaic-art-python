@@ -13,6 +13,29 @@ POS_RED   = 1
 POS_GREEN = 2
 POS_BLUE  = 3
 
+def main():
+    color_data = materials_list_from_file('average_color.csv')
+
+    icon_im = Image.open('my_icon.png')
+    icon_im_width, icon_im_height = icon_im.size
+    mosaic_icon_im = Image.new('RGBA', (1600, 1600))
+
+    for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
+        for top in range(0, icon_im_height, DOT_AREA_ONE_SIDE):
+            average_color = average_color_in_range(icon_im, left, top,
+                                left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
+            if len(average_color) != 3:
+                continue
+
+            filename = similar_color_filename(average_color, color_data)
+            # 距離最小のファイルを縮小して1600×1600の画像に貼り付け
+            area_im = Image.open('image/euph_part_icon/'+filename)
+            area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
+            mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
+                                           top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
+
+    mosaic_icon_im.save('product/my_icon_mosaic.png')
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
@@ -121,29 +144,6 @@ def similar_color_filename(average_color, color_data):
             distance = d
             filename = color[POS_NAME]
     return filename
-
-def main():
-    color_data = materials_list_from_file('average_color.csv')
-
-    icon_im = Image.open('my_icon.png')
-    icon_im_width, icon_im_height = icon_im.size
-    mosaic_icon_im = Image.new('RGBA', (1600, 1600))
-
-    for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
-        for top in range(0, icon_im_height, DOT_AREA_ONE_SIDE):
-            average_color = average_color_in_range(icon_im, left, top,
-                                left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
-            if len(average_color) != 3:
-                continue
-
-            filename = similar_color_filename(average_color, color_data)
-            # 距離最小のファイルを縮小して1600×1600の画像に貼り付け
-            area_im = Image.open('image/euph_part_icon/'+filename)
-            area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
-            mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
-                                           top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
-
-    mosaic_icon_im.save('product/my_icon_mosaic.png')
 
 if __name__ == '__main__':
     main()
