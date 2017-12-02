@@ -28,9 +28,9 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
                 red   += rgba[0]
                 green += rgba[1]
                 blue  += rgba[2]
-        red   = int(red   / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
-        green = int(green / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
-        blue  = int(blue  / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
+        red   = round(red   / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
+        green = round(green / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
+        blue  = round(blue  / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
 
         distance = 255**2 * 3 # 最大の距離
         filename = ''
