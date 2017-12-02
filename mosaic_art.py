@@ -3,6 +3,35 @@ import csv
 from PIL import Image
 
 
+def materials_list_from_file(filename):
+    """Returns a list which contains material image information.
+
+    Args:
+        filename: File name such as "foo.csv"
+            The file contains information on average color of image.
+            (Average color maens the average of the values of R of all pixels,
+             the average of the values of G of all pixels,
+             and the average of the values of B of all pixels)
+            A row is as follows:
+                image_name, R_average, G_average, B_average
+
+    Returns:
+        A list of tuples
+        Tuple is like (
+            image_name   : str (such as "bar.png"),
+            red_average  : int,
+            green_average: int,
+            blue_average : int
+            )
+    """
+    color_data = []
+    with open(filename, 'r', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            image_info = (row[0], int(row[1]), int(row[2]), int(row[3]))
+            color_data.append(image_info)
+    return color_data
+
 DOT_AREA_ONE_SIDE = 10
 THUMBNAIL_ONE_SIDE = 40
 
@@ -46,26 +75,3 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         mosaic_icon_im.paste(area_im, (left//10 * THUMBNAIL_ONE_SIDE, top//10 * THUMBNAIL_ONE_SIDE))
 
 mosaic_icon_im.save('product/my_icon_mosaic.png')
-
-def materials_list_from_file(filename):
-    """Returns a list which contains material image information.
-
-    Args:
-        filename: File name such as "foo.csv"
-            The file contains information on average color of image.
-            (Average color maens the average of the values of R of all pixels,
-             the average of the values of G of all pixels,
-             and the average of the values of B of all pixels)
-            A row is as follows:
-                image_name, R_average, G_average, B_average
-
-    Returns:
-        A list of tuples
-        Tuple is like (
-            image_name   : str (such as "bar.png"),
-            red_average  : int,
-            green_average: int,
-            blue_average : int
-            )
-    """
-    pass
