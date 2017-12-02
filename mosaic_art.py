@@ -32,10 +32,11 @@ def materials_list_from_file(filename):
             color_data.append(image_info)
     return color_data
 
-def average_color_in_range(left, top, right, bottom):
+def average_color_in_range(icon_im, left, top, right, bottom):
     """Returns the average color of pixels in a given region
 
     Args:
+        icon_im: Image object of Pillow
         left: X coordinate of the upper left point of the given region
         top:  Y coordinate of the upper left point of the given region
             NOTICE: (left, top) is included in the given region
@@ -46,7 +47,24 @@ def average_color_in_range(left, top, right, bottom):
     Returns:
         A tuple which means (R, G, B)
     """
-    pass
+    if left >= right: # 引数は left < right と想定
+        return ()
+    if bottom >= top: # 引数は top < bottom と想定
+        return ()
+    red   = 0
+    green = 0
+    blue  = 0
+    for x in range(left, right):
+        for y in range(top, bottom):
+            rgba = icon_im.getpixel((x, y))
+            red   += rgba[0]
+            green += rgba[1]
+            blue  += rgba[2]
+    pixel_count = (right-left) * (bottom-top)
+    red   = round(red   / pixel_count)
+    green = round(green / pixel_count)
+    blue  = round(blue  / pixel_count)
+    return (red, green, blue)
 
 DOT_AREA_ONE_SIDE = 10
 THUMBNAIL_ONE_SIDE = 40
