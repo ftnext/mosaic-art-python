@@ -45,4 +45,4 @@ for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
         mosaic_icon_im.paste(area_im, (left//10 * THUMBNAIL_ONE_SIDE, top//10 * THUMBNAIL_ONE_SIDE))
 
-mosaic_icon_im.save('my_icon_mosaic.png')
+mosaic_icon_im.save('product/my_icon_mosaic.png')
