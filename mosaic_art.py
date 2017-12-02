@@ -48,8 +48,10 @@ def average_color_in_range(icon_im, left, top, right, bottom):
         A tuple which means (R, G, B)
     """
     if left >= right: # 引数は left < right と想定
+        print('left', left, '>= right', right)
         return ()
-    if bottom >= top: # 引数は top < bottom と想定
+    if top >= bottom: # 引数は top < bottom と想定
+        print('bottom', bottom, '>= top', top)
         return ()
     red   = 0
     green = 0
@@ -77,19 +79,11 @@ mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
 for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
     for top in range(0, icon_im_height, DOT_AREA_ONE_SIDE):
-        red = 0
-        green = 0
-        blue = 0
-        #平均色の計算
-        for x in range(left, left+DOT_AREA_ONE_SIDE):
-            for y in range(top, top+DOT_AREA_ONE_SIDE):
-                rgba = icon_im.getpixel((x, y))
-                red   += rgba[0]
-                green += rgba[1]
-                blue  += rgba[2]
-        red   = round(red   / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
-        green = round(green / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
-        blue  = round(blue  / (DOT_AREA_ONE_SIDE*DOT_AREA_ONE_SIDE))
+        try:
+            red, green, blue = average_color_in_range(icon_im, left, top,
+                                   left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
+        except ValueError:
+            continue
 
         distance = 255**2 * 3 # 最大の距離
         filename = ''
