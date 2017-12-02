@@ -19,9 +19,9 @@ for image_name in os.listdir('image/euph_part_icon'):
             red   += rgba[0]
             green += rgba[1]
             blue  += rgba[2]
-    red   = int(red   / (im_width*im_height))
-    green = int(green / (im_width*im_height))
-    blue  = int(blue  / (im_width*im_height))
+    red   = round(red   / (im_width*im_height))
+    green = round(green / (im_width*im_height))
+    blue  = round(blue  / (im_width*im_height))
     data_list.append([image_name, red, green, blue])
 
 with open('average_color.csv', 'w', newline='') as csv_file:
