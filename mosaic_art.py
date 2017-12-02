@@ -68,6 +68,21 @@ def average_color_in_range(icon_im, left, top, right, bottom):
     blue  = round(blue  / pixel_count)
     return (red, green, blue)
 
+def similar_color_filename(average_color, color_data):
+    """Returns name of file similar to average color
+
+    Find the image with average color closest to `average_color` from `color_data`
+
+    Args:
+        average_color: a tuple which means (R, G, B) of average color of a certain range
+        color_data: A list of tuples
+                    Tuple is like (image_name, red_average, green_average, blue_average)
+
+    Returns:
+        A name of file such as 'foo.png' (NOT path)
+    """
+    pass
+
 DOT_AREA_ONE_SIDE = 10
 THUMBNAIL_ONE_SIDE = 40
 
