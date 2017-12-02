@@ -32,6 +32,22 @@ def materials_list_from_file(filename):
             color_data.append(image_info)
     return color_data
 
+def average_color_in_range(left, top, right, bottom):
+    """Returns the average color of pixels in a given region
+
+    Args:
+        left: X coordinate of the upper left point of the given region
+        top:  Y coordinate of the upper left point of the given region
+            NOTICE: (left, top) is included in the given region
+        right:  X coordinate of the lower right point of the given area
+        bottom: Y coordinate of the lower right point of the given area
+            NOTICE: (right, bottom) is NOT included in the given region
+
+    Returns:
+        A tuple which means (R, G, B)
+    """
+    pass
+
 DOT_AREA_ONE_SIDE = 10
 THUMBNAIL_ONE_SIDE = 40
 
