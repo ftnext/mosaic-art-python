@@ -6,7 +6,11 @@ env/
 
 # Material Pictures
 image/
+material/
 my_icon.png
+
+# Material Pictures Information
+average_color.csv
 
 # Created Pictures
 product/

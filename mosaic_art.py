@@ -28,9 +28,8 @@ def main():
                 continue
 
             filename = similar_color_filename(average_color, color_data)
-            # 距離最小のファイルを縮小して1600×1600の画像に貼り付け
-            area_im = Image.open('image/euph_part_icon/'+filename)
-            area_im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
+            # 距離最小のファイルを1600×1600の画像に貼り付け
+            area_im = Image.open('material/euph_part_icon/'+filename)
             mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
                                            top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
