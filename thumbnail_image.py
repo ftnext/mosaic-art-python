@@ -10,4 +10,4 @@ for image_name in os.listdir('image/euph_part_icon'):
         continue
     im = Image.open('image/euph_part_icon/'+image_name)
     im.thumbnail((THUMBNAIL_ONE_SIDE, THUMBNAIL_ONE_SIDE))
-    im.save('material/'+image_name)
+    im.save('material/euph_part_icon/'+image_name)
