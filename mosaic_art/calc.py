@@ -57,14 +57,27 @@ def mode_color_in_range(icon_im, left, top, right, bottom):
     if top >= bottom: # 引数は top < bottom と想定
         print('bottom', bottom, '>= top', top)
         return ()
+    red_values   = []
+    green_values = []
+    blue_values  = []
     color_values = []
     for x in range(left, right):
         for y in range(top, bottom):
             rgba = icon_im.getpixel((x, y))
+            red_values.append(rgba[0])
+            green_values.append(rgba[1])
+            blue_values.append(rgba[2])
             color_str = str(rgba[0]).zfill(3)+str(rgba[1]).zfill(3)+str(rgba[2]).zfill(3)
             color_values.append(color_str)
-    mode_color = st.mode(color_values)
-    red   = int(mode_color[0:2])
-    green = int(mode_color[3:5])
-    blue  = int(mode_color[6:8])
+    try:
+        mode_color = st.mode(color_values)
+    except st.StatisticsError:
+        # 複数の最頻値がある場合、平均値を返す
+        red   = round(st.mean(red_values))
+        green = round(st.mean(green_values))
+        blue  = round(st.mean(blue_values))
+    else:
+        red   = int(mode_color[0:2])
+        green = int(mode_color[3:5])
+        blue  = int(mode_color[6:8])
     return (red, green, blue)
