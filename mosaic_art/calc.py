@@ -1,5 +1,7 @@
 import statistics as st
 
+from PIL import ImageStat
+
 
 def average_color_in_range(icon_im, left, top, right, bottom):
     """Returns the average color of pixels in a given region
@@ -80,4 +82,32 @@ def mode_color_in_range(icon_im, left, top, right, bottom):
         red   = int(mode_color[0:2])
         green = int(mode_color[3:5])
         blue  = int(mode_color[6:8])
+    return (red, green, blue)
+
+def median_color_in_range(icon_im, left, top, right, bottom):
+    """Returns the median color of pixels in a given region
+
+    Args:
+        icon_im: Image object of Pillow
+        left: X coordinate of the upper left point of the given region
+        top:  Y coordinate of the upper left point of the given region
+            NOTICE: (left, top) is included in the given region
+        right:  X coordinate of the lower right point of the given area
+        bottom: Y coordinate of the lower right point of the given area
+            NOTICE: (right, bottom) is NOT included in the given region
+
+    Returns:
+        A tuple which means (R, G, B)
+    """
+    if left >= right: # 引数は left < right と想定
+        print('left', left, '>= right', right)
+        return ()
+    if top >= bottom: # 引数は top < bottom と想定
+        print('bottom', bottom, '>= top', top)
+        return ()
+    im_crop = icon_im.crop((left, top, right, bottom))
+    median_color = ImageStat.Stat(im_crop).median
+    red   = median_color[0]
+    green = median_color[1]
+    blue  = median_color[2]
     return (red, green, blue)
