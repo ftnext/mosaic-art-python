@@ -1,3 +1,6 @@
+import statistics as st
+
+
 def average_color_in_range(icon_im, left, top, right, bottom):
     """Returns the average color of pixels in a given region
 
