@@ -24,18 +24,11 @@ def average_color_in_range(icon_im, left, top, right, bottom):
     if top >= bottom: # 引数は top < bottom と想定
         print('bottom', bottom, '>= top', top)
         return ()
-    red_values   = []
-    green_values = []
-    blue_values  = []
-    for x in range(left, right):
-        for y in range(top, bottom):
-            rgba = icon_im.getpixel((x, y))
-            red_values.append(rgba[0])
-            green_values.append(rgba[1])
-            blue_values.append(rgba[2])
-    red   = round(st.mean(red_values))
-    green = round(st.mean(green_values))
-    blue  = round(st.mean(blue_values))
+    im_crop = icon_im.crop((left, top, right, bottom))
+    mean_color = ImageStat.Stat(im_crop).mean
+    red   = round(mean_color[0])
+    green = round(mean_color[1])
+    blue  = round(mean_color[2])
     return (red, green, blue)
 
 def mode_color_in_range(icon_im, left, top, right, bottom):
