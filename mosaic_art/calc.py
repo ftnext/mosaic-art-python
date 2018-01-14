@@ -79,9 +79,9 @@ def mode_color_in_range(icon_im, left, top, right, bottom):
         green = round(st.mean(green_values))
         blue  = round(st.mean(blue_values))
     else:
-        red   = int(mode_color[0:2])
-        green = int(mode_color[3:5])
-        blue  = int(mode_color[6:8])
+        red   = int(mode_color[0:3])
+        green = int(mode_color[3:6])
+        blue  = int(mode_color[6:9])
     return (red, green, blue)
 
 def median_color_in_range(icon_im, left, top, right, bottom):
