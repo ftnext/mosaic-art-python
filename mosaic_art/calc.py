@@ -59,18 +59,17 @@ def mode_color_in_range(icon_im, left, top, right, bottom):
     for x in range(left, right):
         for y in range(top, bottom):
             rgba = icon_im.getpixel((x, y))
-            red_values.append(rgba[0])
-            green_values.append(rgba[1])
-            blue_values.append(rgba[2])
             color_str = str(rgba[0]).zfill(3)+str(rgba[1]).zfill(3)+str(rgba[2]).zfill(3)
             color_values.append(color_str)
     try:
         mode_color = st.mode(color_values)
     except st.StatisticsError:
         # 複数の最頻値がある場合、平均値を返す
-        red   = round(st.mean(red_values))
-        green = round(st.mean(green_values))
-        blue  = round(st.mean(blue_values))
+        im_crop = icon_im.crop((left, top, right, bottom))
+        mean_color = ImageStat.Stat(im_crop).mean
+        red   = round(mean_color[0])
+        green = round(mean_color[1])
+        blue  = round(mean_color[2])
     else:
         red   = int(mode_color[0:3])
         green = int(mode_color[3:6])
