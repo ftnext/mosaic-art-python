@@ -1,12 +1,21 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+# Jupyter Notebook
+.ipynb_checkpoints
+
 # Environments
 env/
 
 # Material Pictures
 image/
+material/
 my_icon.png
+
+# Material Pictures Information
+average_color.csv
+mode_color.csv
+median_color.csv
 
 # Created Pictures
 product/
