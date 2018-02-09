@@ -16,9 +16,7 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * このリポジトリをクローン
 * 必要なモジュールをpip install
   * `pip install pillow` (必須)
-  * `pip install numpy` (notebookで動かす際に使う)
-  * `pip install matplotlib` (notebookで動かす際に使う)
-  * `pip install jupyter` (notebookで動かす際に使う)
+  * `pip install numpy matplotlib jupyter` (notebookで動かす際に使う)
 
 # フォルダ構成 ※作成中
 ┣ env/ :仮想環境
