@@ -48,6 +48,15 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * ┣ mosaic_art.ipynb
 * ┗ dot_picture.py :notebookで使っているメソッドの元
 
+# 注意点
+* 対象画像は `my_icon.png` という名前で配置してください。
+* 素材画像は`image/`フォルダの下に`euph_part_icon`というフォルダを作ってその中に配置してください。
+* 前処理で`python thumbnail_image.py`を実行する前に、`material/`フォルダの下に`euph_part_icon`というフォルダを作ってください。
+* 対象画像、素材画像ともに 400×400 のサイズでしか正常に動作しないと思われます。
+* できあがるモザイクアートのサイズは 1600×1600 になります。対象画像を 10×10 の領域に分割し、各領域に 40×40 のサイズの素材画像のうち一番色が近いものを対応させています。
+
+パスの決め打ち問題や、一定のサイズにしか対応できない点は実装不足なので、今後ソースコードを更新していく。
+
 # 前処理
 1. image/フォルダ以下に素材画像を配置する
 1. 素材画像の縮小画像を用意する: `python thumbnail_image.py` (実行後、material/フォルダ以下に縮小画像ができる)
@@ -75,5 +84,3 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * `python mosaic_art_mode.py` → product/my_icon_mosaic_mode.png
 
 READMEを書いている時点では **平均値×平均値** の組合せを推奨する。
-
-# 注意点
