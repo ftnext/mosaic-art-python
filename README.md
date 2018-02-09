@@ -57,4 +57,23 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * 色の最頻値で素材画像を代表させる場合: `python calculate_mode_color.py` → mode_color.csvが作成される
 
 # モザイクアート作成
+対象画像を my_icon.png として配置する。
+
+モザイクアート作成時、以下の2点を指定している。
+* 対象画像を格子状に分割した領域をどのような色で代表させるか (平均値／中央値／最頻値)
+* 素材画像をどのような色で代表させるか (平均値／中央値／最頻値)
+後者は average_color.csv, median_color.csv, mode_color.csvのうちどれを使うかということ。
+
+色の代表のさせ方については以下の組合せを提供している。
+* 平均値×平均値: 対象画像の領域の色を *平均値* で代表させ、素材画像の色を *平均値* で代表させる: `python mosaic_art.py`
+* 中央値×中央値: 対象画像の領域の色を *中央値* で代表させ、素材画像の色を *中央値* で代表させる: `python mosaic_art_median.py`
+* 最頻値×最頻値: 対象画像の領域の色を *最頻値* で代表させ、素材画像の色を *最頻値* で代表させる: `python mosaic_art_mode.py`
+
+以上3つのコマンドのいずれかを実行すると、product/フォルダにモザイクアートにした画像ができる。
+* `python mosaic_art.py` → product/my_icon_mosaic.png
+* `python mosaic_art_median.py` → product/my_icon_mosaic_median.png
+* `python mosaic_art_mode.py` → product/my_icon_mosaic_mode.png
+
+READMEを書いている時点では **平均値×平均値** の組合せを推奨する。
+
 # 注意点
