@@ -49,5 +49,12 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * ┗ dot_picture.py :notebookで使っているメソッドの元
 
 # 前処理
+1. image/フォルダ以下に素材画像を配置する
+1. 素材画像の縮小画像を用意する: `python thumbnail_image.py` (実行後、material/フォルダ以下に縮小画像ができる)
+1. 素材画像を代表させる色の情報を用意する（実行後、csvファイルができる。このcsvファイルの色情報をモザイクアート作成時に参照する）
+* 色の平均値で素材画像を代表させる場合: `python calculate_average_color.py` → average_color.csvが作成される
+* 色の中央値で素材画像を代表させる場合: `python calculate_median_color.py` → median_color.csvが作成される
+* 色の最頻値で素材画像を代表させる場合: `python calculate_mode_color.py` → mode_color.csvが作成される
+
 # モザイクアート作成
 # 注意点
