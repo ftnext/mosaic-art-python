@@ -71,6 +71,7 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 モザイクアート作成時、以下の2点を指定している。
 * 対象画像を格子状に分割した領域をどのような色で代表させるか (平均値／中央値／最頻値)
 * 素材画像をどのような色で代表させるか (平均値／中央値／最頻値)
+
 後者は average_color.csv, median_color.csv, mode_color.csvのうちどれを使うかということ。
 
 色の代表のさせ方については以下の組合せを提供している。
