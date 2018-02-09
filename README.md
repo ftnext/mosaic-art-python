@@ -1,11 +1,14 @@
 # このリポジトリについて
 PythonのPillowというライブラリでモザイクアートを作ります。
+
 モザイクアートの作成ロジックは以下のLTスライドも合わせてご確認ください。
+
 https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 
 # 開発環境
 * Python 3.6.3
 * Python 3.5.1
+
 2台の端末で開発を進めています。
 2018/01/16時点で、Python3.6系では動くが、3.5系では動かないという事象は発生していません。
 
