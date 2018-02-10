@@ -29,9 +29,7 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 * ┣ my_icon.png :モザイクアート対象画像
 
   前処理で使うファイル
-* ┣ calculate_average_color.py
-* ┣ calculate_median_color.py
-* ┣ calculate_mode_color.py
+* ┣ calculate_material_color.py
 * ┣ thumbnail_image.py
 
   前処理で作成されるファイル (3つは.gitignoreに記載)
@@ -61,9 +59,9 @@ https://speakerdeck.com/ftnext/pillow-mosaic-art-nyumon
 1. image/フォルダ以下に素材画像を配置する
 1. 素材画像の縮小画像を用意する: `python thumbnail_image.py` (実行後、material/フォルダ以下に縮小画像ができる)
 1. 素材画像を代表させる色の情報を用意する（実行後、csvファイルができる。このcsvファイルの色情報をモザイクアート作成時に参照する）
-* 色の平均値で素材画像を代表させる場合: `python calculate_average_color.py` → average_color.csvが作成される
-* 色の中央値で素材画像を代表させる場合: `python calculate_median_color.py` → median_color.csvが作成される
-* 色の最頻値で素材画像を代表させる場合: `python calculate_mode_color.py` → mode_color.csvが作成される
+* 色の平均値で素材画像を代表させる場合: `python calculate_material_color.py average` → average_color.csvが作成される
+* 色の中央値で素材画像を代表させる場合: `python calculate_material_color.py median` → median_color.csvが作成される
+* 色の最頻値で素材画像を代表させる場合: `python calculate_material_color.py mode` → mode_color.csvが作成される
 
 # モザイクアート作成
 対象画像を my_icon.png として配置する。
