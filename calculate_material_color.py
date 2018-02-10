@@ -56,8 +56,28 @@ class ColorCalculator:
             return 'mode_color.csv'
 
 def main():
-    calculator = ColorCalculator(CalcType.AVERAGE)
+    calc_type = type_from_args('hoge')
+    # TODO: calc_typeがNoneのときの処理が未実装
+    calculator = ColorCalculator(calc_type)
     print(calculator.calc_func)
+
+def type_from_args(string):
+    """Return CalcType object corresponding to string
+
+    Args:
+        string: Suppose the first command line arguments (args[1])
+
+    Returns:
+        CalcType object
+    """
+    if string == 'average':
+        return CalcType.AVERAGE
+    elif string == 'median':
+        return CalcType.MEDIAN
+    elif string == 'mode':
+        return CalcType.MODE
+    else:
+        return None
 
 if __name__ == '__main__':
     main()
