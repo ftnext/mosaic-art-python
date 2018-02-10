@@ -1,6 +1,7 @@
 import csv
 from enum import Enum
 import os
+import sys
 
 from PIL import Image
 
@@ -56,8 +57,17 @@ class ColorCalculator:
             return 'mode_color.csv'
 
 def main():
-    calc_type = type_from_args('hoge')
-    # TODO: calc_typeがNoneのときの処理が未実装
+    args = sys.argv
+    if len(args) != 2:
+        print('[Error] Arguments Number:')
+        print('    Usage: python calculate_material_color.py calc_type')
+        sys.exit('    calc_type can take the following values: average, median, mode')
+    calc_type = type_from_args(args[1])
+    if calc_type is None:
+        print('[Error] Invalid argument:')
+        print('    Usage: python calculate_material_color.py calc_type')
+        sys.exit('    calc_type can take the following values: average, median, mode')
+
     calculator = ColorCalculator(calc_type)
     print(calculator.calc_func)
 
