@@ -24,6 +24,30 @@ class ColorCalculator:
         self.calc_func = ColorCalculator.calculate_function(calc_type)
         self.csv_name = ColorCalculator.color_csv_name(calc_type)
 
+    def calculate(self):
+        """Create a color information file for material images
+
+        Args:
+            self: ColorCalculator object
+                self.calc_func: color calculation method
+                self.csv_name: color information file name (CSV)
+
+        Returns:
+            None
+        """
+        data_list = []
+        for image_name in os.listdir('image/euph_part_icon'):
+            if not image_name.endswith('.png'):
+                continue
+            im = Image.open('image/euph_part_icon/'+image_name)
+            im_width, im_height = im.size
+            red, green, blue = self.calc_func(im, 0, 0, im_width, im_height)
+            data_list.append([image_name, red, green, blue])
+
+        with open(self.csv_name, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerows(data_list)
+
     def calculate_function(calc_type):
         """Return function corresponding to color calculation type
 
@@ -68,8 +92,8 @@ def main():
         print('    Usage: python calculate_material_color.py calc_type')
         sys.exit('    calc_type can take the following values: average, median, mode')
 
-    calculator = ColorCalculator(calc_type)
-    print(calculator.calc_func)
+    cc = ColorCalculator(calc_type)
+    cc.calculate()
 
 def type_from_args(string):
     """Return CalcType object corresponding to string
