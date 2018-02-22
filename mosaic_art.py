@@ -18,7 +18,7 @@ POS_BLUE  = 3
 def main():
     color_data = materials_list_from_file('average_color.csv')
 
-    icon_im = Image.open('my_icon.png')
+    icon_im = open_RGBA_image('my_icon.png')
     icon_im_width, icon_im_height = icon_im.size
     mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
