@@ -37,6 +37,24 @@ def main():
 
     mosaic_icon_im.save('product/my_icon_mosaic.png')
 
+def open_RGBA_image(image_path):
+    """Open a image in 'RGBA' mode
+
+    Args:
+        image_path: str
+            image file path
+
+    Returns:
+        Image Object
+            always 'RGBA' mode
+    """
+    im = Image.open(image_path)
+    if im.mode != 'RGBA':
+        print('convert to RGBA from {0}: {1}'.format(im.mode, image_path))
+        return im.convert('RGBA')
+    else:
+        return im
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
