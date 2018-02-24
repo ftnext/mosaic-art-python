@@ -1,8 +1,11 @@
 from PIL import Image
 
+from mosaic_art import image_process
+
+
 DOT_AREA_ONE_SIDE = 10
 
-icon_im = Image.open('my_icon.png')
+icon_im = image_process.open_image_RGB('my_icon.png')
 icon_im_width, icon_im_height = icon_im.size
 dot_icon_im = icon_im.copy()
 
