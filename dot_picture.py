@@ -2,6 +2,7 @@ from PIL import Image
 
 from mosaic_art import image_process
 
+
 DOT_AREA_ONE_SIDE = 10
 
 icon_im = image_process.open_image_RGB('my_icon.png')
