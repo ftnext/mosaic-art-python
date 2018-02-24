@@ -3,6 +3,7 @@ import csv
 from PIL import Image
 
 from mosaic_art import calc
+from mosaic_art import image_process
 
 
 DOT_AREA_ONE_SIDE = 10
@@ -18,7 +19,7 @@ POS_BLUE  = 3
 def main():
     color_data = materials_list_from_file('mode_color.csv')
 
-    icon_im = open_RGBA_image('my_icon.png')
+    icon_im = image_process.open_image_RGB('my_icon.png')
     icon_im_width, icon_im_height = icon_im.size
     mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
@@ -36,24 +37,6 @@ def main():
                                            top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
     mosaic_icon_im.save('product/my_icon_mosaic_mode.png')
-
-def open_RGBA_image(image_path):
-    """Open a image in 'RGBA' mode
-
-    Args:
-        image_path: str
-            image file path
-
-    Returns:
-        Image Object
-            always 'RGBA' mode
-    """
-    im = Image.open(image_path)
-    if im.mode != 'RGBA':
-        print('convert to RGBA from {0}: {1}'.format(im.mode, image_path))
-        return im.convert('RGBA')
-    else:
-        return im
 
 # このファイルではmodeになっているので注意
 def materials_list_from_file(filename):
