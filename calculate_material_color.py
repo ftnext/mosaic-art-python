@@ -6,6 +6,7 @@ import sys
 from PIL import Image
 
 from mosaic_art import calc
+from mosaic_art import image_process
 
 
 class CalcType(Enum):
@@ -39,7 +40,7 @@ class ColorCalculator:
         for image_name in os.listdir('image/euph_part_icon'):
             if not image_name.endswith('.png'):
                 continue
-            im = Image.open('image/euph_part_icon/'+image_name)
+            im = image_process.open_image_RGB('image/euph_part_icon/'+image_name)
             im_width, im_height = im.size
             red, green, blue = self.calc_func(im, 0, 0, im_width, im_height)
             data_list.append([image_name, red, green, blue])
