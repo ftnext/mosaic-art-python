@@ -1,9 +1,9 @@
 import csv
-import os.path
 import sys
 
 from PIL import Image
 
+from mosaic_art import args_validation
 from mosaic_art import calc
 from mosaic_art import image_process
 
@@ -20,55 +20,10 @@ POS_BLUE  = 3
 
 def main():
     args = sys.argv
-    if validate(args):
+    if args_validation.validate(args):
         create_mosaic_art(args[1])
     else:
         sys.exit('Terminate without creating mosaic art due to argument error')
-
-def validate(args):
-    """Validates arguments
-
-    Args:
-        args: list of arguments
-    """
-    if len(args) > 2:
-        print('Too Many arguments:', args)
-        show_usage()
-        return False
-    elif len(args) == 1:
-        print('Missing arguments')
-        show_usage()
-        return False
-    if not validate_image_format(args[1]):
-        print('image file is not PNG or JPEG:', args[1])
-        show_usage()
-        return False
-    if not exists_file(args[1]):
-        print('image file does not exist:', args[1])
-        show_usage()
-        return False
-    return True
-
-def validate_image_format(image):
-    """Verify that the image file path is PNG or JPEG
-
-    Args:
-        image: target image file path (:str)
-    """
-    return image.endswith('png') or image.endswith('jpg')
-
-def exists_file(file):
-    """Verify that the file exists
-
-    Args:
-        file: target file path (:str)
-    """
-    return os.path.exists(file)
-
-def show_usage():
-    """Displays usage along with error message
-    """
-    print('[Usage] python mosaic_art.py target/image/path')
 
 def create_mosaic_art(target_im):
     """Creates mosaic art from target image
