@@ -17,6 +17,14 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+def validate_image_format(image):
+    """Verify that the image file path is PNG or JPEG
+
+    Args:
+        image: target image file path (:str)
+    """
+    return image.endswith('png') or image.endswith('jpg')
+
 def show_usage():
     """Displays usage along with error message
     """
