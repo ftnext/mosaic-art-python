@@ -1,7 +1,9 @@
 import csv
+import sys
 
 from PIL import Image
 
+from mosaic_art import args_validation
 from mosaic_art import calc
 from mosaic_art import image_process
 
@@ -17,9 +19,22 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+    args = sys.argv
+    if args_validation.validate(args):
+        create_mosaic_art(args[1])
+    else:
+        sys.exit('Terminate without creating mosaic art due to argument error')
+
+def create_mosaic_art(target_im):
+    """Creates mosaic art from target image
+
+    Args:
+        target_im: path of target image file (:str)
+            example: 'foo/bar.png'
+    """
     color_data = materials_list_from_file('average_color.csv')
 
-    icon_im = image_process.open_image_RGB('my_icon.png')
+    icon_im = image_process.open_image_RGB(target_im)
     icon_im_width, icon_im_height = icon_im.size
     mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
