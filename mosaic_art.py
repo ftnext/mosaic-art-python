@@ -1,4 +1,5 @@
 import csv
+import os.path
 
 from PIL import Image
 
@@ -24,6 +25,14 @@ def validate_image_format(image):
         image: target image file path (:str)
     """
     return image.endswith('png') or image.endswith('jpg')
+
+def exists_file(file):
+    """Verify that the file exists
+
+    Args:
+        file: target file path (:str)
+    """
+    return os.path.exists(file)
 
 def show_usage():
     """Displays usage along with error message
