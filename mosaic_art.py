@@ -17,9 +17,16 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+def create_mosaic_art(target_im):
+    """Creates mosaic art from target image
+
+    Args:
+        target_im: path of target image file (:str)
+            example: 'foo/bar.png'
+    """
     color_data = materials_list_from_file('average_color.csv')
 
-    icon_im = image_process.open_image_RGB('my_icon.png')
+    icon_im = image_process.open_image_RGB(target_im)
     icon_im_width, icon_im_height = icon_im.size
     mosaic_icon_im = Image.new('RGBA', (1600, 1600))
 
