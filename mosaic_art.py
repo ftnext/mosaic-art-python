@@ -17,6 +17,11 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+def show_usage():
+    """Displays usage along with error message
+    """
+    print('[Usage] python mosaic_art.py target/image/path')
+
 def create_mosaic_art(target_im):
     """Creates mosaic art from target image
 
