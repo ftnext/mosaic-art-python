@@ -18,6 +18,30 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+def validate(args):
+    """Validates arguments
+
+    Args:
+        args: list of arguments
+    """
+    if len(args) > 2:
+        print('Too Many arguments:', args)
+        show_usage()
+        return False
+    elif len(args) == 1:
+        print('Missing arguments')
+        show_usage()
+        return False
+    if not validate_image_format(args[1]):
+        print('image file is not PNG or JPEG:', args[1])
+        show_usage()
+        return False
+    if not exists_file(args[1]):
+        print('image file does not exist:', args[1])
+        show_usage()
+        return False
+    return True
+
 def validate_image_format(image):
     """Verify that the image file path is PNG or JPEG
 
