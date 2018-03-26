@@ -1,5 +1,6 @@
 import csv
 import os.path
+import sys
 
 from PIL import Image
 
@@ -18,6 +19,12 @@ POS_GREEN = 2
 POS_BLUE  = 3
 
 def main():
+    args = sys.argv
+    if validate(args):
+        create_mosaic_art(args[1])
+    else:
+        sys.exit('Terminate without creating mosaic art due to argument error')
+
 def validate(args):
     """Validates arguments
 
