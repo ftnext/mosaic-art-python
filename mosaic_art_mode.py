@@ -54,6 +54,21 @@ def create_mosaic_art_with_mode(target_im):
 
     mosaic_icon_im.save('product/my_icon_mosaic_mode.png')
 
+def mosaic_art_mode_file_name(target_im):
+    """Returns a file name from target image name
+
+    Args:
+        target_im: path of target image file (:str)
+            example: 'foo/bar.png'
+
+    Returns:
+        str
+            example: 'bar_mosaic_mode_20180331121251.png'
+    """
+    target_file_name = extract_file_name(target_im)
+    now_dt = now_datetime()
+    return '{0}_mosaic_mode_{1}.png'.format(target_file_name, now_dt)
+
 def extract_file_name(file_path):
     """Extracts file name from file path (not including extension)
 
