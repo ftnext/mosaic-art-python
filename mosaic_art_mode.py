@@ -1,4 +1,5 @@
 import csv
+import datetime
 import sys
 
 from PIL import Image
@@ -52,6 +53,34 @@ def create_mosaic_art_with_mode(target_im):
                                            top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
     mosaic_icon_im.save('product/my_icon_mosaic_mode.png')
+
+def extract_file_name(file_path):
+    """Extracts file name from file path (not including extension)
+
+    Args:
+        file_path: str
+            example: 'foo/bar.png'
+
+    Returns:
+        str
+            example: 'bar'
+
+    """
+    # ファイルパスからファイル名(拡張子含む)を取り出す
+    file_name = file_path.split('/')[-1]
+    # 拡張子を取り除く
+    return file_name.split('.')[0]
+
+def now_datetime():
+    """Returns current time as '%Y%m%d%H%M%S' string
+
+    Returns:
+        str
+            example: '20180331121251'
+                current time 2018/3/31 12:12:51
+    """
+    now = datetime.datetime.now()
+    return now.strftime('%Y%m%d%H%M%S')
 
 # このファイルではmodeになっているので注意
 def materials_list_from_file(filename):
