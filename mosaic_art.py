@@ -54,6 +54,21 @@ def create_mosaic_art(target_im):
 
     mosaic_icon_im.save('product/my_icon_mosaic.png')
 
+def mosaic_art_file_name(target_im):
+    """Returns a file name from target image name
+
+    Args:
+        target_im: path of target image file (:str)
+            example: 'foo/bar.png'
+
+    Returns:
+        str
+            example: 'bar_mosaic_20180331121251.png'
+    """
+    target_file_name = extract_file_name(target_im)
+    now_dt = now_datetime()
+    return '{0}_mosaic_{1}.png'.format(target_file_name, now_dt)
+
 def extract_file_name(file_path):
     """Extracts file name from file path (not including extension)
 
