@@ -1,4 +1,5 @@
 import csv
+import datetime
 import sys
 
 from PIL import Image
@@ -69,6 +70,17 @@ def extract_file_name(file_path):
     file_name = file_path.split('/')[-1]
     # 拡張子を取り除く
     return file_name.split('.')[0]
+
+def now_datetime():
+    """Returns current time as '%Y%m%d%H%M%S' string
+
+    Returns:
+        str
+            example: '20180331121251'
+                current time 2018/3/31 12:12:51
+    """
+    now = datetime.datetime.now()
+    return now.strftime('%Y%m%d%H%M%S')
 
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
