@@ -53,6 +53,23 @@ def create_mosaic_art(target_im):
 
     mosaic_icon_im.save('product/my_icon_mosaic.png')
 
+def extract_file_name(file_path):
+    """Extracts file name from file path (not including extension)
+
+    Args:
+        file_path: str
+            example: 'foo/bar.png'
+
+    Returns:
+        str
+            example: 'bar'
+
+    """
+    # ファイルパスからファイル名(拡張子含む)を取り出す
+    file_name = file_path.split('/')[-1]
+    # 拡張子を取り除く
+    return file_name.split('.')[0]
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
