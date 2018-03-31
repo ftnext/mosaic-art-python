@@ -52,7 +52,9 @@ def create_mosaic_art(target_im):
             mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
                                            top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
-    mosaic_icon_im.save('product/my_icon_mosaic.png')
+    save_file_path = 'product/{}'.format(mosaic_art_file_name(target_im))
+    print('Mosaic art created at', save_file_path)
+    mosaic_icon_im.save(save_file_path)
 
 def mosaic_art_file_name(target_im):
     """Returns a file name from target image name
