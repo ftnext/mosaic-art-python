@@ -119,6 +119,27 @@ def material_color_file_name(representative_color):
         sys.exit('Not assumed args at function `material_color_file_name`: {}'
                  .format(representative_color))
 
+def color_calculate_method(representative_color):
+    """Returns a method for color calculation of target image
+    corresponding to specified representative color
+
+    Args:
+        representative_color: str
+            assumed to be `average`, `median` or `mode`
+
+    Returns:
+        function
+    """
+    if representative_color == 'average':
+        return calc.average_color_in_range
+    elif representative_color == 'median':
+        return calc.median_color_in_range
+    elif representative_color == 'mode':
+        return calc.mode_color_in_range
+    else:
+        sys.exit('Not assumed args at function `color_calculate_method`: {}'
+                 .format(representative_color))
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
