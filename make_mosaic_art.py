@@ -56,20 +56,38 @@ def create_mosaic_art(target_im):
     print('Mosaic art created at', save_file_path)
     mosaic_icon_im.save(save_file_path)
 
-def mosaic_art_file_name(target_im):
+def mosaic_art_file_name(target_im,
+                         target_representation, material_representation):
     """Returns a file name from target image name
 
     Args:
         target_im: path of target image file (:str)
             example: 'foo/bar.png'
+        target_representation: str
+            assumed to be `average`, `median` or `mode`
+        material_representation: str
+            assumed to be `average`, `median` or `mode`
 
     Returns:
         str
-            example: 'bar_mosaic_20180331121251.png'
+            example: 'bar_mosaic_average_median_20180331121251.png'
+                target_representation: 'average'
+                material_representation: 'median'
     """
+    representation_variation = ['average', 'median', 'mode']
+    if not target_representation in representation_variation:
+        sys.exit('Not assumed args `target_representation` '
+                 'at function `mosaic_art_file_name`: {}'
+                 .format(target_representation))
+    elif not material_representation in representation_variation:
+        sys.exit('Not assumed args `material_representation` '
+                 'at function `mosaic_art_file_name`: {}'
+                 .format(material_representation))
     target_file_name = extract_file_name(target_im)
     now_dt = now_datetime()
-    return '{0}_mosaic_{1}.png'.format(target_file_name, now_dt)
+    return '{0}_mosaic_{1}_{2}_{3}.png'.format(
+                target_file_name, target_representation,
+                material_representation, now_dt)
 
 def extract_file_name(file_path):
     """Extracts file name from file path (not including extension)
