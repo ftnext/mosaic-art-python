@@ -127,15 +127,11 @@ def material_color_file_name(representative_color):
     Returns:
         str
     """
-    if representative_color == 'average':
-        return 'average_color.csv'
-    elif representative_color == 'median':
-        return 'median_color.csv'
-    elif representative_color == 'mode':
-        return 'mode_color.csv'
-    else:
+    representation_variation = ['average', 'median', 'mode']
+    if not representative_color in representation_variation:
         sys.exit('Not assumed args at function `material_color_file_name`: {}'
                  .format(representative_color))
+    return '{}_color.csv'.format(representative_color)
 
 def color_calculate_method(representative_color):
     """Returns a method for color calculation of target image
