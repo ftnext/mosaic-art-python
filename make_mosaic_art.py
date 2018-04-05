@@ -99,6 +99,26 @@ def now_datetime():
     now = datetime.datetime.now()
     return now.strftime('%Y%m%d%H%M%S')
 
+def material_color_file_name(representative_color):
+    """Returns file name corresponding to specified representative color
+
+    Args:
+        representative_color: str
+            assumed to be `average`, `median` or `mode`
+
+    Returns:
+        str
+    """
+    if representative_color == 'average':
+        return 'average_color.csv'
+    elif representative_color == 'median':
+        return 'median_color.csv'
+    elif representative_color == 'mode':
+        return 'mode_color.csv'
+    else:
+        sys.exit('Not assumed args at function `material_color_file_name`: {}'
+                 .format(representative_color))
+
 def materials_list_from_file(filename):
     """Returns a list which contains material image information.
 
