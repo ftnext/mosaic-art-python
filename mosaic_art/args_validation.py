@@ -53,4 +53,5 @@ def valid_color_representation(representation):
 def show_usage():
     """Displays usage along with error message
     """
-    print('[Usage] python mosaic_art.py target/image/path')
+    print('[Usage] python mosaic_art.py target/image/path '
+          'target_color_mode material_color_mode')
