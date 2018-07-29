@@ -41,6 +41,15 @@ def exists_file(file):
     """
     return os.path.exists(file)
 
+def valid_color_representation(representation):
+    """Verify that the color representation is either average, median or mode.
+
+    Args:
+        representation: str
+    """
+    representation_variation = ['average', 'median', 'mode']
+    return representation in representation_variation
+
 def show_usage():
     """Displays usage along with error message
     """
