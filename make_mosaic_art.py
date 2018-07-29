@@ -22,26 +22,34 @@ POS_BLUE  = 3
 def main():
     args = sys.argv
     if args_validation.validate(args):
-        create_mosaic_art(args[1])
+        create_mosaic_art(args[1], args[2], args[3])
     else:
         sys.exit('Terminate without creating mosaic art due to argument error')
 
-def create_mosaic_art(target_im):
+def create_mosaic_art(target_im,
+                      target_representation, material_representation):
     """Creates mosaic art from target image
+    with specified representation colors about target and material
 
     Args:
         target_im: path of target image file (:str)
             example: 'foo/bar.png'
+        target_representation: str
+            assumed to be `average`, `median` or `mode`
+        material_representation: str
+            assumed to be `average`, `median` or `mode`
     """
-    color_data = materials_list_from_file('average_color.csv')
+    color_data_file = material_color_file_name(material_representation)
+    color_data = materials_list_from_file(color_data_file)
 
     icon_im = image_process.open_image_RGB(target_im)
     icon_im_width, icon_im_height = icon_im.size
     mosaic_icon_im = Image.new('RGBA', (1600, 1600))
+    calculation_method = color_calculate_method(target_representation)
 
     for left in range(0, icon_im_width, DOT_AREA_ONE_SIDE):
         for top in range(0, icon_im_height, DOT_AREA_ONE_SIDE):
-            average_color = calc.average_color_in_range(icon_im, left, top,
+            average_color = calculation_method(icon_im, left, top,
                                 left+DOT_AREA_ONE_SIDE, top+DOT_AREA_ONE_SIDE)
             if len(average_color) != 3:
                 continue
@@ -52,7 +60,9 @@ def create_mosaic_art(target_im):
             mosaic_icon_im.paste(area_im, (left//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE,
                                            top//DOT_AREA_ONE_SIDE * THUMBNAIL_ONE_SIDE))
 
-    save_file_path = 'product/{}'.format(mosaic_art_file_name(target_im))
+    saved_file = mosaic_art_file_name(target_im,
+                    target_representation, material_representation)
+    save_file_path = 'product/{}'.format(saved_file)
     print('Mosaic art created at', save_file_path)
     mosaic_icon_im.save(save_file_path)
 
